@@ -1,0 +1,12 @@
+.margin_left_right_20 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+
+.my-card{
+    position:absolute;
+    left:40%;
+    top:-20px;
+    border-radius:50%;
+}
