@@ -71,6 +71,50 @@
         </div>
     </div>
 </div>
+
+<div class="container" style="margin-top: 17px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <!-- <div class="card-header">{{ __('Login Information') }}</div>-->
+
+                <div class="card-body">
+                    <table class="table table-bordered">
+						<thead>
+						<tr>
+							<th scope="col">Role</th>
+							<th scope="col">Email</th>
+							<th scope="col">Password</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Super Admin</th>
+								<td>admin@gmail.com</td>
+								<td>1234</td>
+							</tr>
+							<tr>
+								<th scope="row">Supervisor</th>
+								<td>super@gmail.com</td>
+								<td>1234</td>
+							</tr>
+							<tr>
+								<th scope="row">User</th>
+								<td>user@gmail.com</td>
+								<td>1234</td>
+							</tr>
+							<tr>
+								<th scope="row">Client</th>
+								<td>client@gmail.com</td>
+								<td>1234</td>
+							</tr>
+						</tbody>
+					</table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @push('js')
 

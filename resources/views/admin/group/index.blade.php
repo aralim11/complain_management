@@ -63,16 +63,52 @@
                         @csrf
                         <div class="form-group">
                             <label for="name" class="col-form-label text-md-right">{{ __('Department') }}</label>
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required>
+                            <input id="name_save" type="text" class="form-control @error('name') is-invalid @enderror" name="name" >
+                        
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong id="name_save_msg">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-primary" id="save_dept">Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 @endsection
+@push('js')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#save_dept").click(function(e) {
+                e.preventDefault();
+                var data = $("#name_save").val();
 
+                if(data == '')
+                {
+                    $("#name_save").addClass("is-invalid");
+
+                } else {
+                    $("#name_save").removeClass("is-invalid"); 
+                }
+
+                $.ajax({
+                    url: 'save-book',
+                    data: {'id': data},
+                    type: 'POST',
+                    datatype: 'JSON',
+                    success: function (response) {
+
+                    },
+                    error: function (response) {
+
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

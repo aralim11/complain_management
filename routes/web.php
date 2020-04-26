@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/clear', function() {
@@ -31,12 +31,25 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     Route::resource('user', 'UserController');
     Route::resource('updateticket', 'UpdateTicket');
     Route::resource('profile', 'ProfileController');
+
+    // Report Search
+    Route::get('report', 'ReportController@index')->name('report.index');
+    Route::get('report-search', 'ReportController@reportSearch')->name('report.search');
+    Route::get('report-export/{src_type}{src_keyword}{start_date}{end_date}', 'ReportController@export');
+
+    // Route::resource('report', 'ReportController');
+    
 });
 
 Route::group(['as' => 'supervisor.', 'prefix' => 'supervisor', 'namespace' => 'Supervisor', 'middleware' => ['auth', 'supervisor']], function () {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
     Route::resource('updateticket', 'UpdateTicket');
     Route::resource('profile', 'ProfileController');
+
+    // Report Search
+    Route::get('report', 'ReportController@index')->name('report.index');
+    Route::get('report-search', 'ReportController@reportSearch')->name('report.search');
+    Route::get('report-export/{src_type}{src_keyword}{start_date}{end_date}', 'ReportController@export');
 });
 
 Route::group(['as' => 'user.', 'prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth', 'user']], function () {

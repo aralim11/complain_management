@@ -74,7 +74,7 @@
                     <label for="old_password" class="col-md-4 col-form-label text-md-right">{{ __('Old Password') }}</label>
 
                     <div class="col-md-6">
-                        <input id="old_password" type="password" class="form-control @if(session()->has('pass_msg')) is-invalid @endif" name="old_password" autocomplete="old-password" placeholder="Old Password">
+                        <input id="old_password" readonly type="password" class="form-control @if(session()->has('pass_msg')) is-invalid @endif" name="old_password" autocomplete="old-password" placeholder="Old Password">
 
                         @if(session()->has('pass_msg'))
                         <span class="invalid-feedback" role="alert">
@@ -88,7 +88,7 @@
                     <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                     <div class="col-md-6">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="New Password">
+                        <input id="password" readonly type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password" placeholder="New Password">
 
                         @error('password')
                         <span class="invalid-feedback" role="alert">
@@ -102,7 +102,7 @@
                     <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                     <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password" placeholder="Re Type New Password">
+                        <input id="password-confirm" readonly type="password" class="form-control" name="password_confirmation" autocomplete="new-password" placeholder="Re Type New Password">
                     </div>
                 </div>
                 <div class="modal-footer">

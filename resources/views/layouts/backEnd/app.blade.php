@@ -58,6 +58,9 @@
                         @else
                             @if(Request::is('admin*'))
                             <li class="nav-item">
+                                <a class="nav-link {{ Request::is('admin/report') ? 'active' : '' }}" href="{{ route('admin.report.index') }}">{{ __('Report') }}</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link {{ Request::is('admin/updateticket') ? 'active' : '' }}" href="{{ route('admin.updateticket.index') }}">{{ __('Update Ticket') }}</a>
                             </li>
                             <li class="nav-item">
@@ -66,9 +69,12 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('admin/group') ? 'active' : '' }}" href="{{ route('admin.group.index') }}">{{ __('Department') }}</a>
                             </li>
-                            @endif
+                        @endif
 
                             @if(Request::is('supervisor*'))
+                                <li class="nav-item">
+                                    <a class="nav-link {{ Request::is('supervisor/report') ? 'active' : '' }}" href="{{ route('supervisor.report.index') }}">{{ __('Report') }}</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ Request::is('supervisor/updateticket') ? 'active' : '' }}" href="{{ route('supervisor.updateticket.index') }}">{{ __('Update Ticket') }}</a>
                                 </li>

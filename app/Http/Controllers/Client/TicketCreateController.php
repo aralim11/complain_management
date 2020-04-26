@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Ticket;
 use App\User;
 use App\User_group;
+use App\TicketHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -120,7 +121,32 @@ class TicketCreateController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required'],
+            'email' => ['required'],
+            'department' => ['required'],
+            'priority' => ['required'],
+            'details' => ['required'],
+        ]);
 
+        if($validator->fails())
+        {
+            session()->flash('delete_msg', 'Error!! Check Hints!!');
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+
+            $ticket = Ticket::find($id);
+
+            TicketHistory::create([
+                'ticket_id' => $id,
+                'user_id' => Auth::id(),
+                'status' => $ticket->status,
+                'details' => $request->details,
+             ]);
+
+             session()->flash('success_msg', 'Ticket Updated!!');
+             return redirect()->back();
+        }
     }
 
     /**

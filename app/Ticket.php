@@ -30,4 +30,9 @@ class Ticket extends Model
     {
         return $this->hasMany(TicketHistory::class, 'ticket_id', 'id');
     }
+
+    public function user_role_from_history()
+    {
+        return $this->belongsTo(User_role::class, 'user_id', 'id');
+    }
 }
