@@ -44,8 +44,8 @@
                 <div class="form-group col-md-3">
                     <div class="btn-group" role="group" aria-label="Basic example" style="margin-left: -39px;">
                         <button type="submit" class="btn btn-primary" style="margin-top: 36px;"><i class="fa fa-search" aria-hidden="true">&nbsp;Search</i></button>&nbsp;&nbsp;
-                        <a id="admin_report_download_link" href="{{ url('report-export/src_type=status/src_keyword=1/start_date=2020-04-01/end_date=2020-04-21')}}" target="blank">
-                            <button type="submit" id="admin_report_download" class="btn btn-danger" style="margin-top: 36px;"><i class="fa fa-download" aria-hidden="true">&nbsp;Download</i></button>
+                        <a id="admin_report_download_link" href="{{ route('supervisor.report.export',[$src_type,$src_keyword,$start_date,$end_date]) }}" target="blank">
+                            <button type="button" id="admin_report_download" class="btn btn-danger" style="margin-top: 36px;"><i class="fa fa-download" aria-hidden="true">&nbsp;Download</i></button>
                         </a>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
     </form>
 
     <div class="card">
-        {{-- <div class="card-header">@yield('title')<a href="{{ route('admin.report.export') }}"><button class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-download" aria-hidden="true">&nbsp;Download</i></button></a></div> --}}
+        <div class="card-header">@yield('title')</div>
 
         <div class="card-body">
             @if($count == 0)

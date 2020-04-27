@@ -47,5 +47,11 @@ class ReportController extends Controller
         return view('supervisor.report.index', compact('search', 'src_type', 'src_keyword', 'count', 'start_date', 'end_date'));
     }
 
+    public function export($src_type,$src_keyword,$start_date,$end_date)
+    {
+        $name = date('Y_m_d_H_m_s');
+        return Excel::download(new TicketExport($src_type, $src_keyword, $start_date, $end_date), $name.'.xlsx');
+    }
+
     
 }

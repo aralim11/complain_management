@@ -4,6 +4,7 @@ namespace App\Exports\Report;
 use App\Ticket;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Illuminate\Support\Facades\Auth;
 
 class TicketExport implements FromCollection, WithHeadings
 {
@@ -22,6 +23,7 @@ class TicketExport implements FromCollection, WithHeadings
         return $ticket = Ticket::select('created_from','department','assing_to','priority','status','created_at')
                         ->where($this->src_type, $this->src_keyword)
                         ->whereBetween('created_at', [$this->start_date .' '.'00:00:01', $this->end_date .' '.'23:59:59'])
+                        ->where('department', Auth::user()->user_group_id)
                         ->get();
     }
 

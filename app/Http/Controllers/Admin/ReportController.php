@@ -36,19 +36,10 @@ class ReportController extends Controller
         return view('admin.report.index', compact('search', 'src_type', 'src_keyword', 'count', 'start_date', 'end_date'));
     }
 
-    public function export($src_type)
+    public function export($src_type,$src_keyword,$start_date,$end_date)
     {
         $name = date('Y_m_d_H_m_s');
-        // $src_type = $_GET['src_type'];
-        // $src_keyword = $_GET['src_keyword'];
-        // $start_date = $_GET['start_date'];
-        // $end_date = $_GET['end_date'];
-        // $src_type = 'status';
-        $src_keyword = '4';
-        $start_date = '2020-04-01';
-        $end_date = '2020-04-19';
-        // return Excel::download(new TicketExport($src_type, $src_keyword, $start_date, $end_date), $name.'.xlsx');
-        return $src_type.$src_keyword.$start_date.$end_date;
+        return Excel::download(new TicketExport($src_type, $src_keyword, $start_date, $end_date), $name.'.xlsx');
     }
 
     

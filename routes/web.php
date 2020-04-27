@@ -35,10 +35,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin', 'mi
     // Report Search
     Route::get('report', 'ReportController@index')->name('report.index');
     Route::get('report-search', 'ReportController@reportSearch')->name('report.search');
-    Route::get('report-export/{src_type}{src_keyword}{start_date}{end_date}', 'ReportController@export');
-
-    // Route::resource('report', 'ReportController');
-    
+    Route::get('report-export/{src_type}/{src_keyword}/{start_date}/{end_date}', 'ReportController@export')->name('report.export');
 });
 
 Route::group(['as' => 'supervisor.', 'prefix' => 'supervisor', 'namespace' => 'Supervisor', 'middleware' => ['auth', 'supervisor']], function () {
@@ -49,7 +46,7 @@ Route::group(['as' => 'supervisor.', 'prefix' => 'supervisor', 'namespace' => 'S
     // Report Search
     Route::get('report', 'ReportController@index')->name('report.index');
     Route::get('report-search', 'ReportController@reportSearch')->name('report.search');
-    Route::get('report-export/{src_type}{src_keyword}{start_date}{end_date}', 'ReportController@export');
+    Route::get('report-export/{src_type}/{src_keyword}/{start_date}/{end_date}', 'ReportController@export')->name('report.export');
 });
 
 Route::group(['as' => 'user.', 'prefix' => 'user', 'namespace' => 'User', 'middleware' => ['auth', 'user']], function () {
