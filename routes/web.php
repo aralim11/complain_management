@@ -60,3 +60,6 @@ Route::group(['as' => 'client.', 'prefix' => 'client', 'namespace' => 'Client', 
     Route::resource('ticketcreate', 'TicketCreateController');
     Route::resource('profile', 'ProfileController');
 });
+
+// For jquery Request
+Route::get('search-keyword', 'ScriptController@SearchKeyword');

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Ticket;
-use App\Exports\Report\TicketExport;
+use App\Exports\Report\AdminTicketExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
@@ -39,7 +39,7 @@ class ReportController extends Controller
     public function export($src_type,$src_keyword,$start_date,$end_date)
     {
         $name = date('Y_m_d_H_m_s');
-        return Excel::download(new TicketExport($src_type, $src_keyword, $start_date, $end_date), $name.'.xlsx');
+        return Excel::download(new AdminTicketExport($src_type, $src_keyword, $start_date, $end_date), $name.'.xlsx');
     }
 
     

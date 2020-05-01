@@ -3,7 +3,12 @@
 @section('title', 'Report Download')
 
 @section('content')
-
+@php
+$keyword = ' ';
+if (!empty($_GET['src_keyword'])) {
+    $keyword = $_GET['src_keyword'];
+}    
+@endphp
     <form method="GET" action="{{ route('admin.report.search') }}">
         <div class="row">
             <div class="col-md-10 form-row">
@@ -20,12 +25,7 @@
                 <div class="form-group col-md-3">
                     <label for="src_keyword" class="col-form-label text-md-right">{{ __('Search Keyword') }}</label>
                     <select class="form-control @error('src_keyword') is-invalid @enderror" id="src_keyword" name="src_keyword" required>
-                        <option value="">Select A Status</option>
-                        <option value="1" @if($src_keyword == '1') {{'selected'}} @endif>New</option>
-                        <option value="2" @if($src_keyword == '2') {{'selected'}} @endif>Pending</option>
-                        <option value="3" @if($src_keyword == '3') {{'selected'}} @endif>Work In Progess</option>
-                        <option value="4" @if($src_keyword == '4') {{'selected'}} @endif>Solve</option>
-                        <option value="5" @if($src_keyword == '5') {{'selected'}} @endif>Wrong Ticket</option>
+                        <option value="">Select Search Keyword</option>
                     </select>
                 </div>
 
@@ -54,7 +54,7 @@
     </form>
 
     <div class="card">
-        {{-- <div class="card-header">@yield('title')<a href="{{ route('admin.report.export') }}"><button class="btn btn-outline-danger btn-sm float-right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-download" aria-hidden="true">&nbsp;Download</i></button></a></div> --}}
+        <div class="card-header">@yield('title')</div>
 
         <div class="card-body">
             @if($count == 0)
@@ -95,32 +95,29 @@
 @endsection
 
 @push('js')
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function() {
   
-            $("#admin_report_download").click(function(e) {
+            $("#src_type").change(function(e) {
                 e.preventDefault();
-                var src_type = $("#src_type").val();
-                var src_keyword = $("#src_keyword").val();
-                var start_date = $("#start_date").val();
-                var end_date = $("#end_date").val();
+                src_keyword();
+            });
+            src_keyword();
+        });
 
-                var url = '{{ url('report-search') }}' +"?src_type=" + src_type + "&src_keyword=" + src_keyword + "&start_date=" + start_date + "&end_date=" + end_date;
-                $('#admin_report_download_link').attr('href', url);
-
+        function src_keyword()
+        {
+            var src_type = $("#src_type").val();
+            var src_keyword =  "{{ $keyword }}"  ;
 
                 $.ajax({
-                    url: '{{ route('admin.report.export') }}',
-                    data: {'src_type' : src_type, 'src_keyword' : src_keyword, 'start_date' : start_date, 'end_date' : end_date},
+                    url: '{{ URL::to('search-keyword') }}',
+                    data: {'src_type' : src_type, 'src_keyword' : src_keyword},
                     type: 'GET',
-                    dataType: 'json',
                     success: function (response) {
-                        // window.open('http://localhost:8000/admin/report-search?src_type=status&src_keyword=1&start_date=2020-04-01&end_date=2020-04-19','_blank' );
-                        console.log(response);
-                    },
-                    
+                        $('#src_keyword').html(response);
+                    }, 
                 });
-            });
-        });
-    </script> --}}
+        }
+    </script>
 @endpush
