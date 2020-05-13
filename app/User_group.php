@@ -18,6 +18,6 @@ class User_group extends Model
 
     public function group_solve_count()
     {
-        return $this->hasMany(Ticket::class, 'status', '4');
+        return $this->group_count()->where('status', '=', '4');
     }
 }

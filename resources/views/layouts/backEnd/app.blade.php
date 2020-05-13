@@ -22,9 +22,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    {{-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> --}}
-    {{-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQBZeKqFIUh5wXufyveLTNEasmQUUHTWg&callback=initMap" type="text/javascript"></script> --}}
-    
 </head>
 <body>
     <div id="app">

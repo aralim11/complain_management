@@ -62,6 +62,10 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
+        if ($id != Auth::user()->id) {
+            return redirect()->back();
+        }
+        
         $profile = User::with('role')->find($id);
 
         return view('supervisor.profile.index', compact('profile'));

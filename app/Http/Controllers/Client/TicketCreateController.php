@@ -10,6 +10,8 @@ use App\TicketHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\ClientTicket;
+use Illuminate\Support\Facades\Notification;
 
 class TicketCreateController extends Controller
 {
@@ -22,6 +24,13 @@ class TicketCreateController extends Controller
     {
         $group = User_group::all();
         $ticket = Ticket::where('created_from', Auth::id())->with('user_group')->paginate(8);
+        $notifications = tap(Auth::user()->unreadNotifications)->markAsRead();
+        // $notifications->markAsRead();
+
+        foreach($notifications as $notification)
+        {  
+            echo "Your Ticket id : ".$notification->data['ticket_id']."<br>";
+        }
 
         return view('client.createticket.index', compact(['group', 'ticket']));
     }
@@ -82,6 +91,11 @@ class TicketCreateController extends Controller
                  'priority' => $request->priority,
                  'details' => $request->details,
               ]);
+
+              $ticket_data = Ticket::where('created_from', Auth::id())->with('user_from_ticket')->orderBy('id', 'DESC')->first();
+              $user = User::where('id', Auth::user()->id)->get();
+            
+              Notification::send($user, new ClientTicket($ticket_data));
 
               session()->flash('success_msg', 'Ticket Created!!');
               return redirect()->back();

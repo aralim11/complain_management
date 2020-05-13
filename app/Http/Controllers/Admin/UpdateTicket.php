@@ -19,7 +19,6 @@ class UpdateTicket extends Controller
     public function index()
     {
         $group = User_group::all();
-        // $ticket = Ticket::all();
         $ticket = Ticket::with(['user_group', 'user_from_ticket', 'user_name_from_ticket', 'history_from_ticket'])->paginate(8);
 
         return view('admin.updateticket.index', compact('ticket', 'group'));

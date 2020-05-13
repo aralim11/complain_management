@@ -21,10 +21,9 @@ class UpdateTicket extends Controller
     public function index()
     {
         $group = User_group::all();
-        $user = User::where('user_role', '!=', '1')->where('user_role', '!=', '2')->where('user_role', '!=', '4')->get();
         $ticket = Ticket::where('department', Auth::user()->user_group_id)->with(['user_group', 'user_from_ticket', 'user_name_from_ticket', 'history_from_ticket'])->paginate(8);
 
-        return view('supervisor.updateticket.index', compact(['ticket', 'group', 'user']));
+        return view('supervisor.updateticket.index', compact(['ticket', 'group']));
     }
 
     /**

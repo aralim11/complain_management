@@ -28,7 +28,7 @@
                     <td>{{ $depts->name }}</td>
                     <td>{{ $depts->group_count()->count() }}</td>
                     <td>{{ $depts->group_solve_count()->count() }}</td>
-                    <td>{{ $depts->created_at }}</td>
+                    <td>{{ date('Y-m-d H:m', strtotime($depts->created_at)) }}</td>
                     <td>
                         <div class="btn-group">
                             <button class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $depts->id }}">Edit</button>&nbsp;&nbsp;
